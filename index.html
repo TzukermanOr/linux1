@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>מבוא ללינוקס · קורס יסודות (7 שעות)</title>
+<title>מבוא ללינוקס · האקדמייה של אור לסייבר (~8 שעות)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Hebrew:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -250,7 +250,7 @@ footer.end .big{font-family:var(--mono);font-size:15px;color:var(--green);margin
     </div>
   </div>
   <div class="toc-meta">
-    משך: <b>~7 שעות</b><br>
+    משך: <b>~8 שעות</b><br>
     רמה: <b>מבוא</b> · ללא ידע מוקדם<br>
     דגש: תפעול + <b>זווית סייבר</b>
   </div>
@@ -267,6 +267,7 @@ footer.end .big{font-family:var(--mono);font-size:15px;color:var(--green);margin
   <a href="#m9"><span class="n">09</span>עורכי טקסט ו-Vim</a>
   <a href="#m10"><span class="n">10</span>סיכום, מילון ותרגול</a>
   <div class="toc-foot">
+    האקדמייה של אור לסייבר<br>
     מבוסס על מצגת HackerU<br>"Introduction to Linux"<br>+ הרחבות והעמקות עצמאיות
   </div>
 </nav>
@@ -289,12 +290,13 @@ root@kali:~# grep -ri password /etc
 root@kali:~# history | tail
 </div>
   <div class="wrap">
-    <div class="kicker">קורס יסודות · The Ethical Hacking Program</div>
+    <div class="kicker">האקדמייה של אור לסייבר · קורס יסודות</div>
     <h1>מבוא ל־<span class="g">לינוקס</span></h1>
     <p class="lead">מערכת ההפעלה שמריצה את רוב העולם - מהשרתים והענן ועד הטלפון בכיס. מדריך עומק שמסביר כל מושג, כל הגדרה וכל פקודה מהבסיס, עם הדגשה מתמדת של <strong>היכן מסתתרות החולשות</strong> והזווית של בודק החדירות.</p>
+    <p style="color:var(--muted);font-size:.95rem;margin:.5rem 0 0;line-height:1.55;">מבוסס על מצגת HackerU "Introduction to Linux" עם הרחבות והעמקות עצמאיות. אין קשר רשמי או מסחרי בין האקדמייה של אור לסייבר לבין HackerU או כל מוסד הוראה אחר.</p>
     <div class="hero-stats">
       <div class="stat"><div class="v">11</div><div class="l">מודולים</div></div>
-      <div class="stat"><div class="v">~7h</div><div class="l">שעות הוראה</div></div>
+      <div class="stat"><div class="v">~8h</div><div class="l">שעות הוראה</div></div>
       <div class="stat"><div class="v">60+</div><div class="l">פקודות</div></div>
       <div class="stat"><div class="v">∞</div><div class="l">תרגול בטרמינל</div></div>
     </div>
@@ -570,7 +572,7 @@ ID=ubuntu  ID_LIKE=debian ...</span>
 <div class="wrap">
   <div class="mod-head">
     <div class="mod-num">04</div>
-    <div><h2>מערכת הקבצים</h2><div class="dur">⏱ ~45 דקות</div></div>
+    <div><h2>מערכת הקבצים</h2><div class="dur">⏱ ~55 דקות</div></div>
   </div>
   <p class="lead-in">בלינוקס "הכל הוא קובץ" - ולכן הבנת מבנה הקבצים שווה זהב. נצעד בעץ התיקיות, נבין מה יושב בכל ענף, ונסמן את הקבצים שתוקף רץ אליהם ראשונים.</p>
 
@@ -624,6 +626,38 @@ ID=ubuntu  ID_LIKE=debian ...</span>
     <div class="bh"><span class="ico">✓</span> טיפ - /proc הוא חלון לתוך המערכת</div>
     <p><code>/proc</code> אינו "באמת" על הדיסק - הוא נוצר בזמן אמת על־ידי הקרנל. <code>/proc/cpuinfo</code> מראה את המעבד, <code>/proc/meminfo</code> את הזיכרון, ו-<code>/proc/[PID]/cmdline</code> את הפקודה המלאה שהריצה תהליך - כולל סיסמאות שהועברו כארגומנט, וזו סיבה טובה לא להעביר סודות בשורת הפקודה.</p>
   </div>
+
+  <h3>קישורים: Soft Links ו-Hard Links</h3>
+  <p>מערכת הקבצים מאפשרת ליצור "כינוי" לקובץ קיים. יש שני סוגים שונים לחלוטין, ולמרות שהם נראים דומים בפועל הם פועלים בצורה שונה מתחת למכסה. כדי להבין אותם צריך מושג מקדים אחד.</p>
+
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: Inode</div>
+    <p>בלינוקס שם הקובץ ותוכן הקובץ הם שני דברים נפרדים. כל קובץ אמיתי מיוצג ע"י <strong>inode</strong> - מבנה נתונים בדיסק שמחזיק את ההרשאות, הבעלות, הגדלים, ומצביעים לבלוקי המידע בפועל. שם הקובץ הוא רק "תווית" שמצביעה ל-inode. ההבחנה הזו היא המפתח להבנת קישורים.</p>
+  </div>
+
+  <h4>Hard Link: שני שמות, אותו inode</h4>
+  <p><strong>קישור קשיח</strong> הוא שם שני (או שלישי, או רביעי) שמצביע על אותו inode. שני הקבצים אינם "העתקים" - הם פשוט שני שמות לאותו תוכן בדיסק. שינוי דרך אחד הוא שינוי גם בשני. מחיקת אחד מהם אינה משפיעה על השני; התוכן באמת נמחק רק כשנמחק השם האחרון. מגבלות: עובד רק על אותה מערכת קבצים (אותו mount), ולא ניתן ליצור hard link לתיקייה.</p>
+
+  <h4>Symbolic Link (Soft Link): מצביע לפי שם</h4>
+  <p><strong>קישור סמלי</strong> הוא קובץ קטן ונפרד שמכיל בתוכו את ה<em>נתיב</em> לקובץ היעד. אם היעד נמחק - הקישור "נשבר" (broken symlink) ומפנה לכלום. הוא יכול להצביע גם לתיקיות וגם לקבצים בכוננים אחרים, מה שקישור קשיח אינו יכול.</p>
+
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - יצירת קישורים והשוואת inodes</span></div>
+    <div class="term-body"><span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">echo "original" > file.txt</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">ln file.txt hardlink.txt</span>       <span class="cmt"># hard link - בלי דגלים</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">ln -s file.txt softlink.txt</span>    <span class="cmt"># soft link - דגל -s</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">ls -li</span>                              <span class="cmt"># -i מציג inode</span>
+<span class="out">123456 -rw-r--r-- 2 root root  9 file.txt</span>
+<span class="out">123456 -rw-r--r-- 2 root root  9 hardlink.txt   </span><span class="cmt"># אותו inode!</span>
+<span class="out">789012 lrwxrwxrwx 1 root root  8 softlink.txt -> file.txt</span></div>
+  </div>
+
+  <p>שתי הוכחות חבויות בפלט: ה-inode (123456) זהה אצל המקור וה-hard link, וסוג הקובץ של ה-soft link מסומן ב-<code>l</code> בתחילת ההרשאות (לעומת <code>-</code> בקובץ רגיל).</p>
+
+  <div class="box sec">
+    <div class="bh"><span class="ico">⚠</span> זווית סייבר - קישורים כווקטור התקפה</div>
+    <p>קישורים סמליים הם מקור קלאסי לפגיעויות <strong>symlink race / symlink attack</strong>: סקריפט שרץ עם הרשאות root פותח קובץ ב-<code>/tmp</code>, ובינתיים תוקף החליף את הקובץ בקישור ל-<code>/etc/shadow</code> - כעת ה-root כותב למקום הלא נכון. בנוסף, בודקי חדירות מחפשים קישורים סמליים בתיקיות שירות (לדוגמה <code>/var/www</code>) שעלולים לחשוף קבצים מחוץ ל-webroot. הגנה מקובלת היא הפעלת <em>protected_symlinks</em> ב-sysctl ושימוש בקריאת מערכת <code>openat</code> עם הדגל <code>O_NOFOLLOW</code>.</p>
+  </div>
 </div>
 </section>
 
@@ -632,9 +666,25 @@ ID=ubuntu  ID_LIKE=debian ...</span>
 <div class="wrap">
   <div class="mod-head">
     <div class="mod-num">05</div>
-    <div><h2>משתמשים והרשאות</h2><div class="dur">⏱ ~55 דקות</div></div>
+    <div><h2>משתמשים והרשאות</h2><div class="dur">⏱ ~75 דקות</div></div>
   </div>
   <p class="lead-in">מודל ההרשאות של לינוקס הוא לב ההגנה של המערכת - ולכן גם המטרה המרכזית של הסלמת הרשאות. נתחיל מסוגי המשתמשים, נצלול להרשאות הקבצים, ונגיע ל-SUID - אחד הנושאים החשובים ביותר ל-Privilege Escalation.</p>
+
+  <div class="box note">
+    <div class="bh"><span class="ico">!</span> דיוק חשוב לפני שנתחיל - שלושה דברים שונים שנשמעים אותו דבר</div>
+    <p>בלינוקס המילה "root" מופיעה בשלושה הקשרים שונים, וזו אחת הטעויות הנפוצות ביותר אצל מתחילים. שווה לעצור עליה לפני שנמשיך:</p>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>מונח</th><th>מה זה</th><th>היכן תפגשו אותו</th></tr></thead>
+      <tbody>
+        <tr><td><code>/</code></td><td>שורש מערכת הקבצים. "ההורה" של כל הנתיבים בלינוקס.</td><td><code>cd /</code>, ‏<code>ls /</code></td></tr>
+        <tr><td><code>/root</code></td><td>תיקיית הבית של משתמש root (המקבילה ל-<code>/home/&lt;user&gt;</code> של משתמש רגיל).</td><td><code>cd /root</code>, ‏<code>ls -la /root</code></td></tr>
+        <tr><td><code>root</code></td><td>חשבון המשתמש (UID 0). לא קובץ ולא תיקייה אלא <strong>זהות של משתמש</strong>.</td><td><code>su root</code>, ‏<code>chown root file</code></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>שימו לב לטעות הקלאסית: <code>cd root</code> (בלי קו נטוי) ינסה להיכנס לתיקייה בשם "root" <em>יחסית למיקום הנוכחי</em>, לא לתיקיית הבית של משתמש root. כדי להגיע אליה צריך נתיב מוחלט: <code>cd /root</code>.</p>
+  </div>
 
   <h3>סוגי משתמשים</h3>
   <p>לינוקס היא מערכת <strong>רב־משתמשתית</strong> (multi-user): כמה משתמשים יכולים לעבוד במקביל, והיכולות של כל אחד מוגבלות באמצעות הרשאות. שלושה "שחקנים" עיקריים:</p>
@@ -711,8 +761,62 @@ ID=ubuntu  ID_LIKE=debian ...</span>
   </div>
 
   <div class="box note">
-    <div class="bh"><span class="ico">!</span> דיוק - x על תיקייה אומר משהו אחר</div>
-    <p>על קובץ, <code>x</code> = הרשאה להריץ אותו. על <strong>תיקייה</strong>, <code>x</code> = הרשאה "להיכנס" אליה (<code>cd</code>) ולגשת לקבצים שבתוכה. לכן ייתכן מצב שיש לכם <code>r</code> על תיקייה (אתם רואים את שמות הקבצים) אך אין <code>x</code> (לא יכולים להיכנס ולקרוא אותם) - ולהפך.</p>
+    <div class="bh"><span class="ico">!</span> דיוק - rwx על תיקייה זה לא כמו על קובץ</div>
+    <p>זו אחת הנקודות שמבלבלות מתחילים יותר מכל. שלוש האותיות בעלות משמעות <strong>שונה לחלוטין</strong> כשהן על תיקייה:</p>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>אות</th><th>על קובץ</th><th>על תיקייה</th></tr></thead>
+      <tbody>
+        <tr><td><code>r</code></td><td>קריאת תוכן הקובץ</td><td>הצגת רשימת השמות בתוכה (<code>ls</code> עובד)</td></tr>
+        <tr><td><code>w</code></td><td>שינוי תוכן הקובץ</td><td>יצירה, מחיקה ושינוי שמות של פריטים בתוך התיקייה</td></tr>
+        <tr><td><code>x</code></td><td>הרצת הקובץ כתוכנית</td><td>"כניסה" לתיקייה (<code>cd</code>) וגישה לקובץ ספציפי בתוכה לפי שם</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>צירופים הגיוניים שכדאי להפנים: <code>r</code> בלי <code>x</code> = רואים את שמות הקבצים אבל אי אפשר להיכנס או לקרוא אותם. <code>x</code> בלי <code>r</code> = אפשר לגשת לקובץ <em>אם יודעים את שמו המדויק</em>, אבל <code>ls</code> לא יעבוד. <code>w</code> בלי <code>x</code> = חסר משמעות מעשית, כי אי אפשר להיכנס כדי ליצור משהו.</p>
+    <p><strong>טעות פופולרית:</strong> מחיקת קובץ דורשת <code>w</code> על ה<em>תיקייה</em> שמכילה אותו - לא על הקובץ עצמו. לכן אפשר למחוק קובץ קריא־בלבד אם יש הרשאת כתיבה לתיקייה. זה גם הסיבה שתיקיית <code>/tmp</code> סטיקית: כולם יכולים לכתוב בה, אבל הסטיקי ביט (ראו בהמשך) מונע מחיקה של קבצים זרים.</p>
+  </div>
+
+  <h3>איך לינוקס מריצה תוכנית: executable bit, shebang ו-binaries</h3>
+  <p>כדי שקובץ "ירוץ" בלינוקס - יהפוך לתהליך פעיל - צריך שיתקיימו שני תנאים: (1) שיהיה לו ביט הרצה (<code>x</code>) למשתמש שמנסה להריץ אותו, ו-(2) שהקרנל ידע איך לפענח את התוכן שלו. נפרק את שניהם.</p>
+
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: Executable Bit</div>
+    <p>הביט <code>x</code> בהרשאות הוא ה"מתג" שמסמן לקרנל: "מותר להריץ את הקובץ הזה". בלי הביט הזה הקובץ הוא רק... קובץ - גם אם תוכנו תוכנה מושלמת. מוסיפים את הביט עם <code>chmod +x</code>. דגש חשוב: בלינוקס סיומת הקובץ (<code>.sh</code>, ‏<code>.exe</code>, ‏<code>.py</code>) <strong>אינה משנה</strong> לצורך הרצה - הקרנל מסתכל על הביט והתוכן, לא על הסיומת.</p>
+  </div>
+
+  <p>אחרי שיש ביט הרצה, התוכן עצמו יכול להיות אחד משני סוגים:</p>
+
+  <h4>1. בינארי מהודר (compiled binary)</h4>
+  <p>קובץ בפורמט <strong>ELF</strong> (Executable and Linkable Format) - קוד מכונה מהודר שהמעבד מריץ ישירות. כך נראים כמעט כל הכלים ב-<code>/bin</code> וב-<code>/usr/bin</code>. אפשר לבדוק זאת עם הפקודה <code>file</code>.</p>
+
+  <h4>2. סקריפט פרשני (interpreted script)</h4>
+  <p>קובץ טקסט שמתחיל בשורה מיוחדת בשם <strong>shebang</strong>: <code>#!/path/to/interpreter</code>. כשהקרנל רואה את שני התווים <code>#!</code> בתחילת קובץ, הוא מבין שזה לא בינארי אלא סקריפט, וטוען את התוכנה שצוינה בשורה (bash, python, perl וכד') כדי שתפענח את שאר הקובץ.</p>
+
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - מהפעלה לפעולה</span></div>
+    <div class="term-body"><span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">cat script.sh</span>
+<span class="out">#!/bin/bash</span>                          <span class="cmt"># shebang - "תריץ אותי עם bash"</span>
+<span class="out">echo "Hello from script"</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">./script.sh</span>
+<span class="err">bash: ./script.sh: Permission denied</span>   <span class="cmt"># אין ביט x</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">chmod +x script.sh</span>           <span class="cmt"># מוסיפים את x</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">./script.sh</span>
+<span class="out">Hello from script</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">file /bin/ls</span>                    <span class="cmt"># מה זה /bin/ls בעצם?</span>
+<span class="out">/bin/ls: ELF 64-bit LSB pie executable, x86-64, dynamically linked</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">file script.sh</span>
+<span class="out">script.sh: Bourne-Again shell script, ASCII text executable</span></div>
+  </div>
+
+  <div class="box tip">
+    <div class="bh"><span class="ico">✓</span> טיפ - למה צריך <code>./</code> בהתחלה</div>
+    <p>בלינוקס, התיקייה הנוכחית <strong>אינה</strong> נכללת בנתיב חיפוש התוכניות (<code>$PATH</code>) כברירת מחדל - שיקול אבטחה מכוון. לכן הקלדת <code>script.sh</code> סתם תחזיר "command not found", ויש לומר במפורש <code>./script.sh</code> = "תוכנית בשם <code>script.sh</code> בתיקייה הנוכחית". על PATH לעומק - מודול 6.</p>
+  </div>
+
+  <div class="box sec">
+    <div class="bh"><span class="ico">⚠</span> זווית סייבר - shebang כ"פנים" של תוקף</div>
+    <p>תוקפים מנצלים את ה-shebang כדי להריץ פרשן שאתם לא מצפים לו. דוגמה: סקריפט שנראה תמים כ-bash אבל בעצם מתחיל ב-<code>#!/usr/bin/env python3</code> וסוחב מנת קוד פייתון מטעה. הצעד הראשון בזיהוי "מה זה בעצם הקובץ הזה?" הוא להציץ בשורה הראשונה (<code>head -n 1</code>) ולהריץ <code>file</code> עליו. בנוסף, סקריפטים עם ביט SUID והרשאות פתוחות הם קרקע פוריה לפגיעויות, כי תוקף יכול לערוך אותם ולהריץ אותם בהרשאות הבעלים.</p>
   </div>
 
   <h3>SUID, SGID ו-Sticky Bit - מעבר ל-rwx</h3>
@@ -769,7 +873,7 @@ ID=ubuntu  ID_LIKE=debian ...</span>
 <div class="wrap">
   <div class="mod-head">
     <div class="mod-num">06</div>
-    <div><h2>ה-CLI, מעטפות והתקנה</h2><div class="dur">⏱ ~35 דקות</div></div>
+    <div><h2>ה-CLI, מעטפות והתקנה</h2><div class="dur">⏱ ~50 דקות</div></div>
   </div>
   <p class="lead-in">הטרמינל הוא הכלי החזק ביותר בלינוקס. נבין מהו, נכיר את המעטפות (shells) השונות, נפענח את מבנה הפקודה, ונסכם את שלבי ההתקנה.</p>
 
@@ -780,9 +884,21 @@ ID=ubuntu  ID_LIKE=debian ...</span>
   </div>
   <p>אפשר להשוות את הטרמינל ל-Command Prompt או PowerShell ב-Windows - אך היכולת שלו רחבה ועוצמתית בהרבה. ברוב משימות התקיפה, ההגנה והאוטומציה, הטרמינל הוא סביבת העבודה היחידה.</p>
 
-  <div class="box note">
-    <div class="bh"><span class="ico">!</span> דיוק - טרמינל מול shell</div>
-    <p>שני מושגים שמתבלבלים: ה<strong>טרמינל</strong> (terminal emulator) הוא ה"חלון" - התוכנה שמציגה טקסט ומקבלת הקשות. ה<strong>shell</strong> (מעטפת) הוא התוכנית שרצה <em>בתוך</em> הטרמינל, מפענחת את הפקודות שלכם ומריצה אותן. כשבודק חדירות אומר "השגתי shell על המכונה" - הכוונה למעטפת שמריצה את פקודותיו על היעד.</p>
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: מודל השכבות - terminal, shell, bash, zsh</div>
+    <p>ארבעה מושגים שמתבלבלים זה בזה כל הזמן. ההפרדה ביניהם הופכת את כל ההמשך לפשוט הרבה יותר:</p>
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>שכבה</th><th>מה זה</th><th>דוגמאות</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Terminal Emulator</strong></td><td>ה"חלון" עצמו: התוכנה שמציגה טקסט על המסך ומקבלת הקשות מקלדת. <em>לא יודעת שום דבר</em> על פקודות לינוקס.</td><td>gnome-terminal, ‏xterm, ‏Konsole, ‏Windows Terminal, ‏iTerm2, ‏Alacritty</td></tr>
+        <tr><td><strong>Shell</strong></td><td>קטגוריה של תוכניות: <em>מתורגמני פקודות</em>. רצות בתוך הטרמינל, מקבלות שורת טקסט, מפענחות אותה לפקודה ומריצות אותה.</td><td>(זו קטגוריה, לא תוכנית ספציפית)</td></tr>
+        <tr><td><code>bash</code></td><td><strong>מימוש</strong> אחד של shell. הנפוץ ביותר ברוב הפצות לינוקס. תוכנית בקובץ <code>/bin/bash</code>.</td><td>ברירת מחדל באובונטו, Debian, RHEL</td></tr>
+        <tr><td><code>zsh</code></td><td>מימוש <em>אחר</em> של shell. תכונות מודרניות יותר (השלמה חכמה, צבעים, תוספים). תוכנית בקובץ <code>/usr/bin/zsh</code>.</td><td>ברירת מחדל ב-Kali וב-macOS</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p>הסדר מלמטה למעלה: <strong>חומרה ← קרנל ← shell (bash/zsh) ← terminal emulator ← אתם</strong>. הטרמינל הוא רק "החלון". בתוכו רצה תוכנית shell. ‏bash ו-zsh הם <em>שני מימושים שונים</em> של אותה ההפשטה "shell". כשבודק חדירות אומר "השגתי shell על המכונה" - הכוונה לתהליך shell אקטיבי שמריץ את פקודותיו על היעד, ולאו דווקא חלון טרמינל.</p>
   </div>
 
   <h3>מעטפות לינוקס (Shells)</h3>
@@ -834,6 +950,49 @@ ID=ubuntu  ID_LIKE=debian ...</span>
     <p><span class="kbd">Tab</span> משלים שמות פקודות וקבצים (לחיצה כפולה = הצגת אפשרויות). <span class="kbd">↑</span>/<span class="kbd">↓</span> דפדוף בהיסטוריה. <span class="kbd">Ctrl+R</span> חיפוש בהיסטוריה. <span class="kbd">Ctrl+C</span> עצירת תהליך. <span class="kbd">Ctrl+L</span> ניקוי המסך. <span class="kbd">Ctrl+A</span>/<span class="kbd">Ctrl+E</span> תחילת/סוף שורה.</p>
   </div>
 
+  <h3>איפה לינוקס מחפשת תוכניות: משתנה ה-PATH</h3>
+  <p>נסו לחשוב על שאלה לכאורה תמימה: כשאתם מקלידים <code>ls</code>, איך לינוקס יודעת שהבינארי נמצא בקובץ <code>/usr/bin/ls</code>? למה לא צריך לכתוב את הנתיב המלא בכל פעם? התשובה היא משתנה סביבה בשם <strong>PATH</strong> - אחד המושגים הבסיסיים ביותר במערכת, ואחד שמבלבל את רוב המתחילים.</p>
+
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: PATH</div>
+    <p><code>$PATH</code> הוא משתנה סביבה שמכיל רשימת תיקיות, מופרדות בנקודתיים (<code>:</code>). כשמקלידים פקודה ללא נתיב מלא, ה-shell עוברת על התיקיות הללו <strong>בסדר</strong>, ומפעילה את הבינארי הראשון שנמצא בעל השם המבוקש. אם לא נמצא בשום תיקייה - תופיע ההודעה הידועה <code>command not found</code>.</p>
+  </div>
+
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - בדיקת PATH ואיתור פקודות</span></div>
+    <div class="term-body"><span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">echo $PATH</span>
+<span class="out">/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">which ls</span>                <span class="cmt"># איפה נמצא הבינארי של ls</span>
+<span class="out">/usr/bin/ls</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">type ls</span>                 <span class="cmt"># מזהה גם alias וגם built-in</span>
+<span class="out">ls is aliased to `ls --color=auto`</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">command -v cd</span>           <span class="cmt"># cd הוא built-in של ה-shell</span>
+<span class="out">cd</span></div>
+  </div>
+
+  <p>התיקיות הסטנדרטיות שתפגשו ב-PATH בכל מערכת לינוקס:</p>
+  <ul>
+    <li><code>/bin</code> - בינארים בסיסיים, חיוניים גם במצב חירום (<code>ls</code>, <code>cat</code>, <code>cp</code>).</li>
+    <li><code>/sbin</code> - בינארי <em>ניהול מערכת</em>, לרוב דורשים root (<code>fdisk</code>, <code>iptables</code>).</li>
+    <li><code>/usr/bin</code> ו-<code>/usr/sbin</code> - רוב הבינארים של המשתמשים והמערכת.</li>
+    <li><code>/usr/local/bin</code> - תוכנות שהותקנו ידנית, מחוץ למנהל החבילות של ההפצה.</li>
+    <li>בהפצות מודרניות רבות, <code>/bin</code> ו-<code>/sbin</code> הם בעצם symlinks ל-<code>/usr/bin</code> ול-<code>/usr/sbin</code> (איחוד שנקרא <em>usrmerge</em>).</li>
+  </ul>
+
+  <p>אפשר להוסיף תיקייה ל-PATH לסשן הנוכחי (זמני) או בקובצי האתחול של ה-shell (<code>~/.bashrc</code>, <code>~/.zshrc</code>) כדי שיישאר קבוע:</p>
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - הוספה ל-PATH</span></div>
+    <div class="term-body"><span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">export PATH=$PATH:/opt/mytools</span>   <span class="cmt"># מצורף בסוף</span>
+<span class="pre">root@kali</span>:<span class="path">~</span># <span class="cmd">echo $PATH</span>
+<span class="out">/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/opt/mytools</span></div>
+  </div>
+
+  <div class="box sec">
+    <div class="bh"><span class="ico">⚠</span> זווית סייבר - PATH Hijacking ו-Privilege Escalation</div>
+    <p>הסדר ב-PATH הוא קריטי. ה-shell עוצרת ב<strong>תיקייה הראשונה</strong> שבה היא מוצאת התאמה. דמיינו משימת cron שרצה כ-root עם PATH שבו <code>/tmp</code> מופיעה <em>לפני</em> <code>/usr/bin</code>, ומבצעת <code>tar</code> בלי נתיב מלא. תוקף יצור קובץ זדוני בשם <code>/tmp/tar</code>, יסמן אותו כניתן להרצה - וכשהמשימה תרוץ, היא תפעיל את הגרסה של התוקף במקום את <code>/usr/bin/tar</code> המקורית. זוהי <strong>PATH Hijacking</strong> - וקטור קלאסי להסלמת הרשאות.</p>
+    <p>הגנה: בסקריפטים רגישים תמיד להשתמש בנתיב מלא (<code>/usr/bin/tar</code>) או להגדיר במפורש <code>PATH=/usr/bin:/bin</code> בתחילת הסקריפט. בצד התקיפה: בדקו את הסקריפטים שרצים כ-root (<code>sudo -l</code>, ‏<code>cron</code>, שירותי systemd) - אם נמצאת בהם פקודה ללא נתיב, זה כדאי לנסות לנצל.</p>
+  </div>
+
   <h3>התקנת לינוקס (Kali) - סקירה</h3>
   <p>הדרך המומלצת ללמוד היא במכונה וירטואלית (VM), כך אפשר להתנסות בלי לסכן את המחשב. השלבים:</p>
   <ol>
@@ -855,7 +1014,7 @@ ID=ubuntu  ID_LIKE=debian ...</span>
 <div class="wrap">
   <div class="mod-head">
     <div class="mod-num">07</div>
-    <div><h2>ניווט ופקודות יסוד</h2><div class="dur">⏱ ~55 דקות</div></div>
+    <div><h2>ניווט ופקודות יסוד</h2><div class="dur">⏱ ~70 דקות</div></div>
   </div>
   <p class="lead-in">עכשיו לידיים. נלמד לנווט בעץ הקבצים, להציג תוכן, להבין פקודות, וליצור / להעתיק / להזיז / למחוק קבצים ותיקיות. כל פקודה - עם הסבר, אפשרויות וזווית אבטחה.</p>
 
@@ -903,6 +1062,46 @@ ID=ubuntu  ID_LIKE=debian ...</span>
     <p><code>.</code> (נקודה אחת) = התיקייה הנוכחית. <code>..</code> (שתיים) = התיקייה שמעל. לכן הרצת סקריפט בתיקייה הנוכחית כותבים <code>./script.sh</code> - ה-<code>./</code> אומר במפורש "מכאן", כי לינוקס לא מחפש תוכניות בתיקייה הנוכחית כברירת מחדל (בניגוד ל-Windows) - שיקול אבטחה מכוון.</p>
   </div>
 
+  <h3>נתיב מוחלט מול נתיב יחסי</h3>
+  <p>בלינוקס יש שתי דרכים שונות לציין מיקום של קובץ או תיקייה. ההבדל ביניהן נראה קטן אבל הוא קריטי - וזו אחת הסיבות הנפוצות לסקריפטים שלא רצים כשמעבירים אותם בין מערכות.</p>
+
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: שני סוגי נתיבים</div>
+    <p><strong>נתיב מוחלט (absolute path)</strong> מתחיל תמיד ב-<code>/</code> ומפרט את הדרך המלאה מהשורש עד היעד. דוגמה: <code>/home/kali/Documents/notes.txt</code>. הוא עובד מכל מקום ובכל זמן - לא משנה איפה אתם נמצאים בעת ההקלדה.</p>
+    <p><strong>נתיב יחסי (relative path)</strong> אינו מתחיל ב-<code>/</code>, ומתפרש <em>ביחס לתיקייה הנוכחית</em> (<code>pwd</code>). אם אתם ב-<code>/home/kali</code> והקלדתם <code>Documents/notes.txt</code>, לינוקס תפענח את זה כ-<code>/home/kali/Documents/notes.txt</code>. אם תעברו תיקייה - אותה פקודה תתייחס למקום אחר לגמרי.</p>
+  </div>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>סימן</th><th>פירוש</th><th>דוגמה</th></tr></thead>
+    <tbody>
+      <tr><td><code>/</code> (בהתחלה)</td><td>שורש מערכת הקבצים</td><td><code>cd /etc</code> = גישה מוחלטת ל-/etc</td></tr>
+      <tr><td><code>.</code></td><td>התיקייה הנוכחית</td><td><code>./script.sh</code> = תוכנית בתיקייה הנוכחית</td></tr>
+      <tr><td><code>..</code></td><td>תיקייה אחת למעלה (parent)</td><td><code>cd ..</code></td></tr>
+      <tr><td><code>~</code></td><td>תיקיית הבית של המשתמש הנוכחי</td><td><code>cd ~/Downloads</code> = <code>cd /home/kali/Downloads</code></td></tr>
+      <tr><td><code>~user</code></td><td>תיקיית הבית של משתמש אחר</td><td><code>ls ~root</code> = <code>ls /root</code></td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - אותה פעולה, שתי גישות</span></div>
+    <div class="term-body"><span class="pre">root@kali</span>:<span class="path">/home/kali</span># <span class="cmd">pwd</span>
+<span class="out">/home/kali</span>
+<span class="pre">root@kali</span>:<span class="path">/home/kali</span># <span class="cmd">cat Documents/notes.txt</span>           <span class="cmt"># יחסי</span>
+<span class="pre">root@kali</span>:<span class="path">/home/kali</span># <span class="cmd">cat /home/kali/Documents/notes.txt</span> <span class="cmt"># מוחלט - אותה תוצאה</span>
+<span class="pre">root@kali</span>:<span class="path">/home/kali</span># <span class="cmd">cd ../..</span>                              <span class="cmt"># שתי רמות למעלה</span>
+<span class="pre">root@kali</span>:<span class="path">/</span># <span class="cmd">pwd</span>
+<span class="out">/</span>
+<span class="pre">root@kali</span>:<span class="path">/</span># <span class="cmd">cat Documents/notes.txt</span>                  <span class="cmt"># אותו נתיב יחסי - כושל!</span>
+<span class="err">cat: Documents/notes.txt: No such file or directory</span></div>
+  </div>
+
+  <div class="box tip">
+    <div class="bh"><span class="ico">✓</span> טיפ - מתי כל אחד מתאים</div>
+    <p><strong>יחסי</strong> מהיר וקצר לעבודה אינטראקטיבית במקום מסוים. <strong>מוחלט</strong> חובה בסקריפטים, ב-cron, בקובצי systemd ובכל הקשר שאינכם יודעים מראש מאיפה הקובץ ירוץ. כלל אצבע: אם זה לא לסשן החי שלכם - כתבו נתיב מלא.</p>
+  </div>
+
   <h3>הצגת תוכן: ls</h3>
   <p>פקודה חיונית נוספת היא <code>ls</code> שמציגה את תוכן התיקייה. היא בשימוש עם אפשרויות רבות:</p>
   <div class="tbl-wrap">
@@ -921,6 +1120,48 @@ ID=ubuntu  ID_LIKE=debian ...</span>
   <div class="box sec">
     <div class="bh"><span class="ico">⚠</span> זווית סייבר - הקבצים המוסתרים זה איפה שהסודות</div>
     <p>בלינוקס קובץ "מוסתר" הוא פשוט כזה ששמו מתחיל בנקודה (<code>.bashrc</code>, ‏<code>.ssh</code>, ‏<code>.env</code>). אין כאן הסתרה אבטחתית - רק מוסכמה ש-<code>ls</code> רגיל לא מציג אותם. דווקא שם יושבים <strong>קבצי ההגדרות והסודות</strong>: מפתחות SSH, אסימוני API בקובצי <code>.env</code>, היסטוריית פקודות. לכן הפקודה הראשונה של תוקף בכל תיקיית בית היא <code>ls -la</code>, לא <code>ls</code>.</p>
+  </div>
+
+  <h3>קבצים נסתרים - מוסכמת הנקודה</h3>
+  <p>נעצור רגע על המושג "קובץ מוסתר", כי זה אחד הדברים הבסיסיים שמתחילים לעיתים מפספסים, ובהמשך נסתמך עליו בלי הסבר.</p>
+
+  <div class="box def">
+    <div class="bh"><span class="ico">◆</span> הגדרה: קובץ מוסתר בלינוקס</div>
+    <p>בלינוקס "הסתרה" של קובץ היא <strong>מוסכמה</strong>, לא מנגנון אבטחה: כל קובץ או תיקייה ששמם מתחיל בנקודה (<code>.</code>) פשוט לא מופיעים בתצוגת ברירת המחדל של <code>ls</code>. הקובץ עצמו רגיל לחלוטין, פתוח לקריאה אם יש הרשאות, ויראה בכל <code>ls -a</code> או במנהל קבצים שמופעלת בו אפשרות "הצג מוסתרים".</p>
+  </div>
+
+  <p>למה בעצם להסתיר? כדי לא להעמיס. תיקיית הבית של כל משתמש מלאה בעשרות קבצי הגדרות, היסטוריה ומטמון שמתעדכנים כל הזמן. בלעדי המוסכמה הזו <code>ls</code> בתוך תיקיית הבית היה רעש מוחלט במקום רשימה שימושית.</p>
+
+  <p>הקבצים הנסתרים החשובים ביותר שתפגשו (וחלקם שווים זהב לבודק חדירות):</p>
+
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>קובץ / תיקייה</th><th>מה יש בו</th></tr></thead>
+    <tbody>
+      <tr><td><code>~/.bashrc</code></td><td>קובץ אתחול של bash - aliases, פונקציות, משתני סביבה. נטען בכל סשן אינטראקטיבי.</td></tr>
+      <tr><td><code>~/.bash_profile</code> / <code>~/.profile</code></td><td>קובץ אתחול של <em>login shell</em> - רץ פעם אחת בכניסה למערכת.</td></tr>
+      <tr><td><code>~/.zshrc</code></td><td>המקבילה של .bashrc למשתמשי zsh.</td></tr>
+      <tr><td><code>~/.bash_history</code></td><td>היסטוריית כל הפקודות שהוקלדו. <strong>מקור קלאסי לסיסמאות שהוקלדו בטעות.</strong></td></tr>
+      <tr><td><code>~/.ssh/</code></td><td>תיקיית מפתחות SSH: <code>id_rsa</code> (מפתח פרטי), <code>id_rsa.pub</code>, <code>authorized_keys</code>, <code>known_hosts</code>.</td></tr>
+      <tr><td><code>~/.gitconfig</code> / <code>~/.git-credentials</code></td><td>הגדרות Git, ולעיתים אסימוני גישה לריפוזיטוריים פרטיים בטקסט גלוי.</td></tr>
+      <tr><td><code>~/.viminfo</code></td><td>היסטוריית עריכה של Vim: שורות שהועתקו, חיפושים אחרונים, קבצים שנפתחו לאחרונה.</td></tr>
+      <tr><td><code>.env</code> בפרויקטים</td><td>משתני סביבה של פרויקט - <strong>שדה מוקשים</strong>. לרוב מכיל מפתחות API, סיסמאות DB, סודות.</td></tr>
+      <tr><td><code>.git/</code></td><td>תיקיית Git של ריפוזיטורי. <strong>קריטי:</strong> אם נחשפת בשרת web פתוח לציבור = חשיפה של כל היסטוריית הקוד והסודות שעליו.</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="term">
+    <div class="term-bar"><span class="dot d1"></span><span class="dot d2"></span><span class="dot d3"></span><span class="tt">Terminal - להסיר את הצעיף</span></div>
+    <div class="term-body"><span class="pre">kali@kali</span>:<span class="path">~</span>$ <span class="cmd">ls</span>                       <span class="cmt"># ברירת מחדל - חסר הרבה</span>
+<span class="out">Desktop  Documents  Downloads  Pictures</span>
+<span class="pre">kali@kali</span>:<span class="path">~</span>$ <span class="cmd">ls -la</span>                    <span class="cmt"># הכל גלוי</span>
+<span class="out">drwxr-xr-x  3 kali kali  4096 .</span>           <span class="cmt"># התיקייה עצמה</span>
+<span class="out">drwxr-xr-x  4 root root  4096 ..</span>          <span class="cmt"># ההורה</span>
+<span class="out">-rw-------  1 kali kali  3526 .bash_history</span>
+<span class="out">-rw-r--r--  1 kali kali  3771 .bashrc</span>
+<span class="out">drwx------  2 kali kali  4096 .ssh</span>
+<span class="out">-rw-r--r--  1 kali kali   807 .profile</span></div>
   </div>
 
   <h3>הבנת פקודות: man ו---help</h3>
@@ -1335,7 +1576,8 @@ root</span></div>
 
 <footer class="end">
   <div class="big">// סוף המדריך - exit 0</div>
-  <p>מדריך יסודות לינוקס · נבנה כחומר הדרכה · מבוסס על מצגת HackerU בתוספת הרחבות עצמאיות</p>
+  <p>מדריך יסודות לינוקס · האקדמייה של אור לסייבר</p>
+  <p style="font-size:.85rem;color:var(--muted);margin:.4rem auto 0;max-width:680px;line-height:1.6;">מבוסס על מצגת HackerU "Introduction to Linux" עם הרחבות והעמקות עצמאיות. החומר שייך לאקדמייה של אור לסייבר. אין קשר רשמי או מסחרי בין האקדמייה לבין HackerU או כל מוסד הוראה אחר.</p>
 </footer>
 </main>
 </div>
